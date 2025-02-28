@@ -5,6 +5,8 @@
     ],
     "routes": [
       { "src": "/documents/(.*)", "dest": "/server.js" },
-      { "src": "/(.*)", "dest": "/src/$1" }
+      { "src": "/files-info", "dest": "/server.js" },
+      { "src": "/(.*)", "dest": "/server.js" }
     ]
   }
+  

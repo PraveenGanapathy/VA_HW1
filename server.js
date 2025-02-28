@@ -3,29 +3,40 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'src')));
+// Determine the correct paths for production (Vercel) or development
+const isProduction = process.env.NODE_ENV === 'production';
+const rootDir = isProduction ? process.cwd() : __dirname;
+
+// Serve static files
+app.use(express.static(path.join(rootDir, 'src')));
 
 // Function to recursively get all files in a directory
 function getAllFiles(dirPath, arrayOfFiles = []) {
-    const files = fs.readdirSync(dirPath);
-    
-    files.forEach(file => {
-        const filePath = path.join(dirPath, file);
+    try {
+        const files = fs.readdirSync(dirPath);
         
-        if (fs.statSync(filePath).isDirectory()) {
-            arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
-        } else {
-            arrayOfFiles.push(filePath);
-        }
-    });
-    
-    return arrayOfFiles;
+        files.forEach(file => {
+            const filePath = path.join(dirPath, file);
+            
+            if (fs.statSync(filePath).isDirectory()) {
+                arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
+            } else {
+                arrayOfFiles.push(filePath);
+            }
+        });
+        
+        return arrayOfFiles;
+    } catch (error) {
+        console.error(`Error reading directory ${dirPath}:`, error);
+        return arrayOfFiles;
+    }
 }
 
+// Get all documents
 app.get('/documents', (req, res) => {
-    const datasetPath = path.join(__dirname, 'dataset');
+    const datasetPath = path.join(rootDir, 'dataset');
     
     try {
         // Get all files in the dataset directory
@@ -50,8 +61,9 @@ app.get('/documents', (req, res) => {
     }
 });
 
+// Get a specific document
 app.get('/documents/:filename', (req, res) => {
-    const filePath = path.join(__dirname, 'dataset', req.params.filename);
+    const filePath = path.join(rootDir, 'dataset', req.params.filename);
     
     // Check if file exists
     if (!fs.existsSync(filePath)) {
@@ -85,9 +97,9 @@ app.get('/documents/:filename', (req, res) => {
     });
 });
 
-// Add a route to get detailed information about all files
+// Get detailed information about all files
 app.get('/files-info', (req, res) => {
-    const datasetPath = path.join(__dirname, 'dataset');
+    const datasetPath = path.join(rootDir, 'dataset');
     
     try {
         const allFilePaths = getAllFiles(datasetPath);
@@ -114,6 +126,17 @@ app.get('/files-info', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+// Add a catch-all route to handle SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(rootDir, 'src', 'index.html'));
 });
+
+// Start the server if not in production (Vercel handles this in production)
+if (!isProduction) {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
+}
+
+// Export the Express app for Vercel
+module.exports = app;
