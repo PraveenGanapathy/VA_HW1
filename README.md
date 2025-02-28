@@ -6,12 +6,6 @@
 Document Visualization Platform (DocViz)
 
 
-
-[Status
-[License
-
-
-
 ---
 
  A web-based application for visualizing and organizing documents that allows users to browse, open, and arrange multiple documents simultaneously in a workspace.
@@ -110,3 +104,5 @@ http://localhost:3000
 ## ✍️ Authors 
 
 - Visual Analysts Course - Project 1
+
+- Readme generated @Readme_Pattern
