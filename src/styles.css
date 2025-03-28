@@ -542,3 +542,127 @@ body {
 #right-panel .card-body {
     overflow: hidden !important;
 }
+
+.open-all-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.3);
+    color: var(--gray-800);
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none;
+}
+
+.open-all-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Styling for visualization modal */
+#clusteringVisualizationModal .modal-dialog {
+    max-width: 90%;
+}
+
+#clusteringVisualizationModal .nav-tabs {
+    border-bottom: 1px solid var(--gray-300);
+}
+
+#clusteringVisualizationModal .nav-link {
+    color: var(--gray-700);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+#clusteringVisualizationModal .nav-link.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    background-color: transparent;
+}
+
+#clusteringVisualizationModal .tab-content {
+    padding: 20px 0;
+}
+
+/* Styling for the form elements in modal footer */
+#clusteringVisualizationModal .form-group {
+    display: flex;
+    align-items: center;
+}
+
+#clusteringVisualizationModal .form-group label {
+    margin-right: 10px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+#clusteringVisualizationModal .form-select {
+    width: auto;
+    display: inline-block;
+}
+
+/* Styling for visualization containers */
+#tfidf-heatmap, #kmeans-scatter, #hierarchical-dendrogram, #entities-network {
+    width: 100%;
+    height: 500px;
+    background-color: var(--gray-100);
+    border-radius: 8px;
+    overflow: hidden;
+}
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spinner-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#loading-message {
+    margin-top: 15px;
+    font-weight: 500;
+    color: var(--gray-800);
+}
+/* Add to your styles.css */
+.header-actions .btn-group {
+    display: inline-flex;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.cluster-header {
+    position: relative;
+    padding: 10px 15px;
+    font-weight: 500;
+    border-radius: 4px 4px 0 0;
+    margin-top: 10px;
+}
