@@ -1,108 +1,114 @@
 
-  
- 
+# Document Visualization Platform (DocViz)
 
-
-Document Visualization Platform (DocViz)
-
+A web-based platform to **visualize, cluster, and organize documents interactively**. DocViz supports dynamic document comparison, text clustering using machine learning, and an interactive drag-and-drop workspace for multi-document analysis.
 
 ---
 
- A web-based application for visualizing and organizing documents that allows users to browse, open, and arrange multiple documents simultaneously in a workspace.
-     
+## 📄 Overview
 
+DocViz enables users to:
+- Open and explore documents from a dataset.
+- Drag, move, minimize, and close multiple documents in a shared workspace.
+- Automatically group documents using clustering algorithms like KMeans and Hierarchical Clustering.
+- Visually compare relationships between documents via MDS (Multidimensional Scaling).
+- Organize or rearrange documents by their assigned cluster visually.
 
-## 📝 Table of Contents
+---
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [Authors](#authors)
+## ⚙️ How It Works
 
-## 🧐 About 
+### Frontend (JavaScript / HTML / D3.js / Bootstrap)
+- Provides interactive UI with drag-and-drop capabilities.
+- Built with plain JavaScript and Bootstrap.
+- MDS graph rendered using D3.js (`renderMDSPlot`) with cluster color coding and zoom support.
+- Cluster organization logic triggered by buttons, with keyboard shortcut bindings.
 
-DocViz is an advanced document visualization tool designed for visual analysts to efficiently explore, analyze, and organize multiple documents simultaneously. The platform provides an intuitive interface for comparing documents, identifying patterns, and extracting insights across various intelligence sources.
+### Backend (Node.js / Express)
+- Express-based server (`server.js`) provides APIs to:
+  - Serve document content.
+  - Serve static files.
+  - Provide clustering results (`/api/cluster-documents`).
+  - Handle caching with `node-cache`.
 
-## 🏁 Getting Started 
+### Data Pipeline (Python)
+- A Python script (`document_clustering.py`) is run periodically or manually to:
+  - Read all text documents from the `/dataset` folder.
+  - Preprocess the text (tokenization, stopword removal, lemmatization).
+  - Convert text to TF-IDF vectors.
+  - Perform KMeans and Hierarchical Clustering.
+  - Generate MDS coordinates for 2D projection.
+  - Output files:
+    - `data/clustering_results.json`
+    - `data/document_features.json`
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+### GitHub Actions
+- A workflow automatically re-runs the clustering pipeline when:
+  - Python file is updated
+  - The dataset is modified
+- On push, GitHub Action:
+  - Installs dependencies (Python, `scikit-learn`, `spacy`, `nltk`, etc.)
+  - Runs `document_clustering.py`
+  - Pushes generated JSON outputs back to `data/` directory
 
-### Prerequisites
+---
 
-What things you need to install:
+## 🧩 Dependencies
 
-```
-Node.js (v14 or higher)
-npm (v6 or higher)
-```
+### Python (used for ML and data generation)
+- `scikit-learn` — clustering and dimensionality reduction
+- `spacy` — NLP preprocessing (lemmatization, tokenization)
+- `nltk` — stopword filtering
+- `numpy`, `pandas` — matrix and data handling
 
-### Installing
+### JavaScript / Web
+- `Bootstrap` — layout and styling
+- `D3.js` — interactive visualizations (MDS, tooltips)
+- `Plotly.js` — heatmaps, scatter plots, dendrograms
 
-A step by step series of examples that tell you how to get a development environment running:
+### Node
+- `express` — server backend
+- `node-cache` — in-memory caching for fast access
+- `fs`, `path` — file operations
 
-1. Clone the repository:
-```
+---
+
+## 🚀 Setup Instructions
+
+### Local Setup
+```bash
 git clone https://github.com/yourusername/docviz.git
 cd docviz
-```
 
-2. Install dependencies:
-```
 npm install
-```
+mkdir dataset  # Add your `.txt` or `.md` files here
 
-3. Create a dataset folder and add your documents:
-```
-mkdir dataset
-```
-
-4. Start the application:
-```
+# Start the server
 npm start
-```
 
-5. Open your browser and navigate to:
-```
+# Visit in browser
 http://localhost:3000
 ```
 
-## 🎈 Usage 
+### Run the clustering pipeline manually
+```bash
+python document_clustering.py
+```
 
-### Document List
-- Browse through categorized documents in the left panel
-- Click on any document to open it in the workspace
-- Drag documents from the list into the workspace
+### Deployment on Vercel
+```bash
+vercel
+```
+- Make sure your `vercel.json` has the correct routes and build settings.
+- Your server file should be named `server.js`.
 
-### Workspace
-- Move documents by dragging their headers
-- Minimize documents using the minimize button
-- Close documents using the close button
-- Organize documents by category with the "Organize" button
-- Clear all documents with the "Clear All" button
+---
 
-### Keyboard Shortcuts
-- **Ctrl/⌘ + O**: Organize documents
-- **Ctrl/⌘ + C**: Clear all documents
-- **Ctrl/⌘ + R**: Refresh document list
-- **Esc**: Close active document
+## 💡 Features Summary
 
-## 🚀 Deployment 
-
-### Vercel Deployment
-1. Install Vercel CLI: `npm install -g vercel`
-2. Run `vercel` in the project directory
-3. Follow the prompts to deploy
-
-## ⛏️ Built Using 
-
-- [Express](https://expressjs.com/) - Server Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-- [Bootstrap](https://getbootstrap.com/) - Frontend Framework
-
-## ✍️ Authors 
-
-- Visual Analysts Course - Project 1
-
-- Readme generated @Readme_Pattern
+- Drag and drop interface to view documents.
+- Clustering of documents by content similarity.
+- Grouping, organizing, and toggling clusters visually.
+- Hotkeys for organizing, clearing, refreshing.
+- GitHub Actions auto-regenerate cluster data.
+- Interactive MDS map with cluster insights.
