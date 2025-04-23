@@ -34,7 +34,16 @@ jobs:
         python -m spacy download en_core_web_sm
     
     - name: Run clustering script
-      run: python document_clustering.py
+      run: |
+        # Print Python version and environment info
+        python --version
+        pip list
+        
+        # Run with verbose output
+        python -v document_clustering.py || {
+          echo "Error running clustering script"
+          exit 1
+        }
     
     - name: Setup data directory
       run: |
