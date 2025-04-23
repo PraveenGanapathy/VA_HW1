@@ -1,35 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
   "routes": [
-    {
-      "src": "/documents/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/files-info",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/clear-cache",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/src/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/src/index.html"
-    }
+    { "src": "/", "dest": "/src/index.html" },
+    { "src": "/documents/(.*)", "dest": "/server.js" },
+    { "src": "/api/(.*)", "dest": "/server.js" },
+    { "src": "/files-info", "dest": "/server.js" },
+    { "src": "/clear-cache", "dest": "/server.js" },
+    { "src": "/(.*)", "dest": "/src/$1" }
   ]
 }
