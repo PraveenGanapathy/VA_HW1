@@ -212,7 +212,8 @@ app.post('/api/cluster-documents', (req, res) => {
             const result = {
                 ...clusteringResults,
                 features: documentFeatures.features,
-                entities: documentFeatures.entities
+                entities: documentFeatures.entities,
+                mds_coordinates: documentFeatures.mds_coordinates
             };
             
             // Cache the results
@@ -224,6 +225,11 @@ app.post('/api/cluster-documents', (req, res) => {
             res.status(500).json({ error: 'Failed to read clustering results' });
         }
     });
+});
+
+app.get('/clear-cache', (req, res) => {
+    cache.flushAll();
+    res.send('Cache cleared');
 });
 
 // Add a catch-all route to handle SPA routing

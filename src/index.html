@@ -32,54 +32,76 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="row workspace-row">
-            <!-- Left Panel - Document List -->
-            <div class="col-md-4" id="left-panel">
-                <div class="card">
+        <div class="row workspace-row align-items-stretch">
+            <!-- Slim Left Panel -->
+            <div class="col-md-2 h-100" id="left-panel">
+                <div class="card h-100">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5><i class="fas fa-folder me-2"></i>Documents</h5>
+                            <h6><i class="fas fa-folder me-2"></i>Docs</h6>
                             <div class="header-actions">
-                                <div class="btn-group">
+                                <div class="btn-group btn-group-sm">
                                     <button class="btn btn-sm btn-primary" id="cluster-btn" title="Run Document Clustering">
-                                        <i class="fas fa-object-group me-1"></i> Analyze
+                                        <i class="fas fa-object-group"></i>
                                     </button>
                                     <button class="btn btn-sm btn-outline-primary" id="group-by-cluster-btn" title="Group Documents by Cluster">
-                                        <i class="fas fa-layer-group me-1"></i> Group
+                                        <i class="fas fa-layer-group"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon" title="Refresh" id="refresh-btn">
+                                        <i class="fas fa-sync-alt"></i>
                                     </button>
                                 </div>
-                                <button class="btn btn-sm btn-icon ms-2" title="Refresh" id="refresh-btn">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div id="document-list"></div>
+                    <div class="card-body p-1" style="height: 100%; overflow-y: auto;">
+                        <div id="document-list" class="small"></div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Right Panel - Document Content -->
-            <div class="col-md-8" id="right-panel">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5><i class="fas fa-file-alt me-2"></i>Document Content</h5>
-                            <div class="header-actions">
-                                <button id="organize-btn" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-th-large me-1"></i> Organize
-                                </button>
-                                <button id="clear-all" class="btn btn-sm btn-outline-danger ms-2">
-                                    <i class="fas fa-trash-alt me-1"></i> Clear All
-                                </button>
+
+            <!-- Middle + Right Panels -->
+            <div class="col-md-10">
+                <!-- MDS Visualization (top half) -->
+                <div class="row mb-3">
+                    <div class="col-12" id="mds-panel">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5><i class="fas fa-project-diagram me-2"></i>Document Relationships</h5>
+                            </div>
+                            <div class="card-body" style="height: auto;">
+                                <div id="mds-plot" style="height: 100%;"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div id="document-workspace"></div>
+                </div>
+
+<!-- Document Workspace (bottom half) -->
+<div class="row">
+    <div class="col-12" id="right-panel">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5><i class="fas fa-file-alt me-2"></i>Document Workspace</h5>
+                    <div class="header-actions">
+                        <button id="organize-btn" class="btn btn-sm btn-primary">
+                            <i class="fas fa-th-large me-1"></i> Organize
+                        </button>
+                        <button id="clear-all" class="btn btn-sm btn-outline-danger ms-2">
+                            <i class="fas fa-trash-alt me-1"></i> Clear All
+                        </button>
                     </div>
                 </div>
+            </div>
+            <div class="card-body">
+                <div class="workspace-container">
+                    <div id="document-workspace"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
@@ -262,6 +284,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
