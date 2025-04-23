@@ -1,0 +1,9 @@
+# Remove or comment out these lines
+# clustering_results.json
+# document_features.json
+
+# Keep ignoring other files
+node_modules/
+.env
+.DS_Store
+*.log
