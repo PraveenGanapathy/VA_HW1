@@ -16,6 +16,12 @@ DocViz enables users to:
 
 ---
 
+##  Architecture Diagram
+
+![Architecture](architecture.svg)
+
+---
+
 ## ⚙️ How It Works
 
 ### Frontend (JavaScript / HTML / D3.js / Bootstrap)
