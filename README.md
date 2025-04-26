@@ -118,3 +118,7 @@ vercel
 - Hotkeys for organizing, clearing, refreshing.
 - GitHub Actions auto-regenerate cluster data.
 - Interactive MDS map with cluster insights.
+
+## 🎬 App Walkthrough
+
+![App Walkthrough](project_demo.gif)
