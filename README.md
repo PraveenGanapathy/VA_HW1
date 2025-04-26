@@ -5,7 +5,7 @@ A web-based platform to **visualize, cluster, and organize documents interactive
 
 ---
 
-## 📄 Overview
+## Overview
 
 DocViz enables users to:
 - Open and explore documents from a dataset.
@@ -22,7 +22,7 @@ DocViz enables users to:
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
 ### Frontend (JavaScript / HTML / D3.js / Bootstrap)
 - Provides interactive UI with drag-and-drop capabilities.
@@ -59,7 +59,7 @@ DocViz enables users to:
 
 ---
 
-## 🧩 Dependencies
+##  Dependencies
 
 ### Python (used for ML and data generation)
 - `scikit-learn` — clustering and dimensionality reduction
@@ -79,7 +79,7 @@ DocViz enables users to:
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Local Setup
 ```bash
@@ -110,7 +110,7 @@ vercel
 
 ---
 
-## 💡 Features Summary
+## Features Summary
 
 - Drag and drop interface to view documents.
 - Clustering of documents by content similarity.
@@ -119,6 +119,6 @@ vercel
 - GitHub Actions auto-regenerate cluster data.
 - Interactive MDS map with cluster insights.
 
-## 🎬 App Walkthrough
+## App Walkthrough
 
 ![App Walkthrough](project_demo.gif)
